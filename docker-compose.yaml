@@ -1,0 +1,33 @@
+version: "3"
+services:
+  # Postgres service
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user1
+      POSTGRES_PASSWORD: pw1
+    ports:
+      - "5432:5432"
+  # rabbitmq service
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - .env
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "secretcookie" # Set a custom cookie for RabbitMQ
+
+   # spring boot service
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: on-failure

@@ -1,0 +1,16 @@
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:rabbitmq}
+    port: 5672
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_USER:guest}
+  sql.init.mode: always
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:postgres}:${POSTGRESQL_PORT:5432}/${POSTGRESQL_DB:db}
+    username: ${POSTGRESQL_USER:user1}
+    password: ${POSTGRESQL_PASSWORD:pw1}
